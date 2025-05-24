@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Контакты — IzicastWood</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Шапка -->
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">IzicastWood</div>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="product.html">Каталог</a>
+        <a href="calculator.html">Калькулятор</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html" class="active">Контакты</a>
+      </nav>
+      <div class="contacts">
+        <a href="tel:+79180684703">+7 (918) 068-47-03</a>
+        <a href="https://wa.me/79180684703" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container contacts-page">
+    <h1>Связаться с нами</h1>
+    <form class="contact-form" action="https://formspree.io/f/mnndrrqo" method="POST">
+      <label>Ваше имя:
+        <input type="text" name="name" required>
+      </label>
+      <label>Телефон:
+        <input type="tel" name="phone" required>
+      </label>
+      <label>E-mail:
+        <input type="email" name="_replyto" required>
+      </label>
+      <label>Сообщение:
+        <textarea name="message" required></textarea>
+      </label>
+      <input type="hidden" name="_redirect" value="thankyou.html">
+      <button class="btn-primary" type="submit">Отправить</button>
+    </form>
+
+    <div class="messengers">
+      <h2>Мессенджеры</h2>
+      <a class="messenger-btn" href="https://wa.me/79180684703" target="_blank">Написать в WhatsApp</a>
+      <a class="messenger-btn" href="https://t.me/izicast" target="_blank">Написать в Telegram (@izicast)</a>
+    </div>
+
+    <div class="address-block">
+      <h2>Наш адрес</h2>
+      <p>Санкт-Петербург, ул. Примерная, д. 1</p>
+      <div class="map-block">
+        <!-- Карта Яндекс. Карты (замените на свой адрес при необходимости) -->
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A9c7bb43c246db6d26c9da92e2d960f232b05b8cd50b8347a0c2e646e486e0d70&amp;source=constructor" width="100%" height="320" frameborder="0"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="logo">IzicastWood</div>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+      </div>
+      <div class="legal">© 2025 IzicastWood</div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

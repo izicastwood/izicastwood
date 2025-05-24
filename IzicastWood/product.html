@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IzicastWood — Форма «Шашлык»</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">IzicastWood</div>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="product.html" class="active">Каталог</a>
+        <a href="calculator.html">Калькулятор</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+      <div class="contacts">
+        <a href="tel:+71234567890">+7 (123) 456-78-90</a>
+        <a href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Контент страницы товара -->
+  <main class="container product-page">
+    <!-- Хлебные крошки -->
+    <div class="breadcrumbs">
+      <a href="index.html">Главная</a> &rarr;
+      <a href="product.html">Каталог</a> &rarr;
+      <span>Форма «Шашлык»</span>
+    </div>
+
+    <!-- Название и цена -->
+    <h1>Форма «Шашлык»</h1>
+    <p class="price">от 4 200 ₽</p>
+
+    <div class="product-main">
+      <!-- Изображение -->
+      <div class="product-images">
+        <img 
+          src="images/2cc4f071-7209-467b-8d7a-18dbeaa90a14.jpg" 
+          alt="Доска «Шашлык» — вид сверху" 
+          class="product-img" />
+      </div>
+
+      <!-- Описание и параметры -->
+      <div class="product-info">
+        <p>
+          Материал: натуральный дуб.<br>
+          Размеры: 50 × 25 × 2 см.<br>
+          Финиш: безопасное для пищевых продуктов масло.
+        </p>
+
+        <!-- Табуляция (по желанию) -->
+        <div class="tabs">
+          <button class="tab-btn active">Описание</button>
+          <button class="tab-btn">Характеристики</button>
+        </div>
+        <div class="tab-panel active">
+          <p>
+            Эта доска специально разработана для подачи ассорти шашлыков — 
+            в центральной нише удобно разместить кусочки мяса, а по бокам 
+            — овощи и соусы. Эргономичная ручка позволяет легко переносить 
+            и подавать блюдо.
+          </p>
+        </div>
+        <div class="tab-panel">
+          <table class="specs">
+            <tr><th>Параметр</th><th>Значение</th></tr>
+            <tr><td>Длина</td><td>50 см</td></tr>
+            <tr><td>Ширина</td><td>25 см</td></tr>
+            <tr><td>Толщина</td><td>2 см</td></tr>
+            <tr><td>Вес</td><td>1.2 кг</td></tr>
+            <tr><td>Материал</td><td>Дуб</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Подвал -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="logo">IzicastWood</div>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+      </div>
+      <div class="legal">© 2025 IzicastWood</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
