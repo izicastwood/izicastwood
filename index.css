@@ -5,24 +5,24 @@
 }
 
 .u-section-1 .u-sheet-1 {
-  min-height: 615px;
+  min-height: 606px;
 }
 
 @media (max-width: 1199px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 507px;
+    min-height: 500px;
   }
 }
 
 @media (max-width: 991px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 388px;
+    min-height: 383px;
   }
 }
 
 @media (max-width: 767px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 291px;
+    min-height: 287px;
   }
 }
 
