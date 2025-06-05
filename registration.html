@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <h2>Регистрация пользователя</h2>
+  <h2 style="text-align:center;">Регистрация пользователя</h2>
   <form id="registerForm" style="max-width:320px;margin:40px auto;">
     <input type="email" id="email" placeholder="Email" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
     <input type="password" id="password" placeholder="Пароль" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
@@ -15,30 +15,43 @@
   <div id="reg-message" style="text-align:center;margin-top:20px;color:green;"></div>
 
   <!-- ==== ПОДКЛЮЧЕНИЕ FIREBASE ==== -->
-<!-- Подключаем Firebase SDK (последнюю стабильную) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
-<script>
-  // ТВОЙ КОНФИГ
-  const firebaseConfig = {
-    apiKey: "AIzaSyC1akzlj1iHHmGVv-NfyNYzOsXAKO543c9g",
-    authDomain: "user-registration-da501.firebaseapp.com",
-    projectId: "user-registration-da501",
-    storageBucket: "user-registration-da501.appspot.com",
-    messagingSenderId: "676255544545",
-    appId: "1:676255544545:web:5f1becf75e7e0e4e3933a0",
-    measurementId: "G-9S9NX4D6B5"
-  };
-  // Инициализация Firebase
-  firebase.initializeApp(firebaseConfig);
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script>
+    // Конфиг из консоли Firebase (ПРОВЕРЕННО ВЕРНЫЙ!)
+    const firebaseConfig = {
+      apiKey: "AIzaSyC1akzlj1iHHmGVv-NfyNYzOsXAKO543c9g",
+      authDomain: "user-registration-da501.firebaseapp.com",
+      projectId: "user-registration-da501",
+      storageBucket: "user-registration-da501.appspot.com",
+      messagingSenderId: "676255544545",
+      appId: "1:676255544545:web:5f1becf75e7e0e4e3933a0",
+      measurementId: "G-9S9NX4D6B5"
+    };
 
-  // Для проверки — выведем alert, если SDK инициализирован
-  alert('Firebase подключён!');
+    // Инициализация Firebase
+    firebase.initializeApp(firebaseConfig);
 
-  // Проверка — создаём пользователя
-  // firebase.auth().createUserWithEmailAndPassword('test@example.com', 'password123')
-  //   .then((userCredential) => { alert('Успех!'); })
-  //   .catch((error) => { alert(error.message); });
-</script>
+    // Обработка формы регистрации
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const messageDiv = document.getElementById('reg-message');
+      messageDiv.style.color = 'green';
+      messageDiv.textContent = "Пробуем зарегистрировать...";
+
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          messageDiv.style.color = 'green';
+          messageDiv.textContent = "Успех! Пользователь зарегистрирован: " + userCredential.user.email;
+          document.getElementById('registerForm').reset();
+        })
+        .catch((error) => {
+          messageDiv.style.color = 'red';
+          messageDiv.textContent = "Ошибка: " + error.message;
+        });
+    });
+  </script>
 </body>
 </html>
