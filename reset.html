@@ -8,15 +8,19 @@
 <body>
   <h2 style="text-align:center;">Восстановление пароля</h2>
   <form id="resetForm" style="max-width:320px;margin:40px auto;">
-    <input type="email" id="resetEmail" placeholder="Ваш email" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
+    <input type="email" id="reset-email" placeholder="Ваш email" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
     <button type="submit" style="width:100%;padding:10px 0;">Сбросить пароль</button>
   </form>
-  <div id="reset-message" style="text-align:center;margin-top:20px;"></div>
-  <div style="text-align:center;"><a href="login.html">Назад к входу</a></div>
+  <div id="reset-message" style="text-align:center;margin-top:20px;color:green;"></div>
+  <div style="text-align:center;">
+    <a href="registration.html">Назад к входу</a>
+  </div>
 
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
   <script>
+    // Твой конфиг
     const firebaseConfig = {
       apiKey: "AIzaSyC1akzlj1iHHmGVv-NfyNYzOsXAKO543c9g",
       authDomain: "user-registration-da501.firebaseapp.com",
@@ -30,17 +34,15 @@
 
     document.getElementById('resetForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const email = document.getElementById('resetEmail').value;
+      const email = document.getElementById('reset-email').value;
       const msg = document.getElementById('reset-message');
-      msg.style.color = 'green';
-      msg.textContent = "Пробуем отправить письмо...";
       firebase.auth().sendPasswordResetEmail(email)
         .then(() => {
-          msg.style.color = 'green';
-          msg.textContent = "Ссылка для сброса пароля отправлена на вашу почту.";
+          msg.style.color = "green";
+          msg.textContent = "Письмо для сброса пароля отправлено!";
         })
         .catch((error) => {
-          msg.style.color = 'red';
+          msg.style.color = "red";
           msg.textContent = "Ошибка: " + error.message;
         });
     });
