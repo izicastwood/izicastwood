@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+    <link rel="stylesheet" href="Регистрация.css" media="screen">
+    <meta name="theme-color" content="#478ac9">
+</head>
+<body class="u-body u-stick-footer u-xl-mode" data-lang="ru">
+<header>
+    <!-- Твой хедер -->
+</header>
+<section class="u-clearfix u-gradient u-section-1" id="sec-d881">
+    <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-sheet-1">
+        <div class="u-expanded-width-xs u-form u-form-1">
+            <form id="regForm" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px;">
+                <div class="u-form-group u-form-phone u-form-group-1">
+                    <label for="phone" class="u-label">Телефон</label>
+                    <input type="tel" id="phone" name="phone" class="u-input u-input-rectangle" required pattern="^\+?\d{10,15}$" placeholder="+7XXXXXXXXXX">
+                </div>
+                <div class="u-form-email u-form-group">
+                    <label for="email" class="u-label">Эл. почта</label>
+                    <input type="email" id="email" name="email" class="u-input u-input-rectangle" required placeholder="Введите email адрес">
+                </div>
+                <div class="u-form-group u-form-group-3">
+                    <input type="checkbox" id="agree" name="agree" class="u-agree-checkbox u-field-input" required>
+                    <label for="agree" class="u-agree-label u-field-label">
+                        Я даю согласие на обработку персональных данных
+                    </label>
+                </div>
+                <div class="u-align-left u-form-group u-form-submit">
+                    <button type="submit" class="u-black u-border-none u-btn u-btn-submit u-button-style u-btn-2">Регистрация</button>
+                </div>
+                <div id="reg-message" class="u-form-send-message" style="margin-top: 20px; text-align: center;"></div>
+            </form>
+        </div>
+    </div>
+</section>
+<footer>
+    <!-- Твой футер -->
+</footer>
+
+<!-- ==== ПОДКЛЮЧЕНИЕ FIREBASE ==== -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script>
+  // Твой firebaseConfig
+  const firebaseConfig = {
+    apiKey: "AIzaSyC1akzlj1iHHmGVv-NfyNYzOsXAKO543c9g",
+    authDomain: "user-registration-da501.firebaseapp.com",
+    projectId: "user-registration-da501",
+    storageBucket: "user-registration-da501.appspot.com",
+    messagingSenderId: "676255544545",
+    appId: "1:676255544545:web:5f1becf75e7e0e4e3933a0",
+    measurementId: "G-9S9NX4D6B5"
+  };
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+
+  document.getElementById('regForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = Math.random().toString(36).slice(-8) + Math.floor(Math.random() * 90 + 10); // Генерим временный пароль
+    const phone = document.getElementById('phone').value.trim();
+    const agree = document.getElementById('agree').checked;
+    const regMsg = document.getElementById('reg-message');
+    regMsg.style.color = 'green';
+    regMsg.textContent = 'Пробуем зарегистрировать...';
+
+    if (!agree) {
+      regMsg.style.color = 'red';
+      regMsg.textContent = 'Необходимо согласиться на обработку персональных данных!';
+      return;
+    }
+
+    // Сначала создаём пользователя по email
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Дополнительно сохраняем телефон в профиле (по желанию)
+        userCredential.user.updateProfile({
+          displayName: phone
+        }).then(() => {
+          regMsg.style.color = 'green';
+          regMsg.textContent = 'Регистрация прошла успешно! Проверьте email для восстановления/установки пароля.';
+          // Выход из аккаунта сразу после регистрации
+          firebase.auth().signOut();
+        });
+      })
+      .catch((error) => {
+        regMsg.style.color = 'red';
+        regMsg.textContent = 'Ошибка: ' + error.message;
+      });
+  });
+</script>
+</body>
+</html>
