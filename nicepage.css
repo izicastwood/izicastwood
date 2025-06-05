@@ -46935,16 +46935,16 @@ a.u-link.u-text-hover-color-var:hover {
 }
 @media (max-width: 575px) {
   .u-header .u-sheet-1 {
-    min-height: 184px;
+    min-height: 191px;
   }
 }
 @media (max-width: 575px) {
   .u-header .u-section-row-2 {
-    min-height: 149px;
+    min-height: 154px;
   }
 
   .u-header .u-image-2 {
-    margin-top: -8px;
+    margin-top: 0;
   }
 
   .u-header .u-text-1 {
@@ -46970,7 +46970,7 @@ a.u-link.u-text-hover-color-var:hover {
     width: 33px;
     margin-top: -43px;
     margin-right: calc(((100% - 340px) / 2)  + -8px);
-    margin-bottom: 60px;
+    margin-bottom: 70px;
   }
 
   .u-header .u-btn-1 {
@@ -46987,7 +46987,7 @@ a.u-link.u-text-hover-color-var:hover {
 }
 
 .u-footer .u-sheet-1 {
-  min-height: 644px;
+  min-height: 718px;
 }
 
 .u-footer .u-position-1 {
@@ -46998,6 +46998,12 @@ a.u-link.u-text-hover-color-var:hover {
 
 .u-footer .u-text-1 {
   margin-top: 0;
+}
+
+.u-footer .u-text-2 {
+  font-family: Audiowide;
+  font-size: 1.875rem;
+  margin: -43px auto 0;
 }
 
 .u-footer .u-social-icons-1 {
@@ -47024,7 +47030,7 @@ a.u-link.u-text-hover-color-var:hover {
   color: rgb(0, 122, 185) !important;
 }
 
-.u-footer .u-text-2 {
+.u-footer .u-text-3 {
   font-size: 1rem;
   margin: 199px 108px 60px;
 }
@@ -47035,6 +47041,10 @@ a.u-link.u-text-hover-color-var:hover {
   }
 
   .u-footer .u-text-2 {
+    margin-top: -43px;
+  }
+
+  .u-footer .u-text-3 {
     margin-left: 8px;
     margin-right: 8px;
   }
@@ -47045,7 +47055,7 @@ a.u-link.u-text-hover-color-var:hover {
     margin-left: 0;
   }
 
-  .u-footer .u-text-2 {
+  .u-footer .u-text-3 {
     margin-left: 0;
     margin-right: 0;
   }
@@ -47054,12 +47064,12 @@ a.u-link.u-text-hover-color-var:hover {
   .u-footer .u-position-1 {
     margin-right: 318px;
   }
+
+  .u-footer .u-text-2 {
+    margin-bottom: 60px;
+  }
 }
 @media (max-width: 575px) {
-  .u-footer .u-sheet-1 {
-    min-height: 439px;
-  }
-
   .u-footer .u-position-1 {
     width: 222px;
     margin-top: 1px;
@@ -47067,14 +47077,20 @@ a.u-link.u-text-hover-color-var:hover {
     margin-right: auto;
   }
 
+  .u-footer .u-text-2 {
+    width: auto;
+    font-size: 1.25rem;
+    margin: -89px 0 0;
+  }
+
   .u-footer .u-social-icons-1 {
     height: 15px;
     width: 195px;
-    margin-top: -15px;
+    margin-top: 46px;
     margin-left: 59px;
   }
 
-  .u-footer .u-text-2 {
+  .u-footer .u-text-3 {
     margin-top: 46px;
   }
 }
