@@ -163,11 +163,12 @@
 
 @media (max-width: 575px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 915px;
+    min-height: 835px;
   }
 
   .u-section-1 .u-form-1 {
     width: 340px;
+    margin-top: 3px;
   }
 
   .u-section-1 .u-list-1 {
