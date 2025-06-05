@@ -2,25 +2,26 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Восстановление пароля</title>
+  <title>Регистрация пользователя</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <h2 style="text-align:center;">Восстановление пароля</h2>
-  <form id="resetForm" style="max-width:320px;margin:40px auto;">
-    <input type="email" id="reset-email" placeholder="Ваш email" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
-    <button type="submit" style="width:100%;padding:10px 0;">Сбросить пароль</button>
+  <h2 style="text-align:center;">Регистрация пользователя</h2>
+  <form id="registerForm" style="max-width:320px;margin:40px auto;">
+    <input type="email" id="email" placeholder="Email" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
+    <input type="password" id="password" placeholder="Пароль" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
+    <button type="submit" style="width:100%;padding:10px 0;">Зарегистрироваться</button>
   </form>
-  <div id="reset-message" style="text-align:center;margin-top:20px;color:green;"></div>
-  <div style="text-align:center;">
-    <a href="registration.html">Назад к входу</a>
+  <div id="reg-message" style="text-align:center;margin-top:20px;color:green;"></div>
+  <div style="text-align:center;margin-top:15px;">
+    <a href="reset.html">Забыли пароль?</a>
   </div>
 
-  <!-- Firebase -->
+  <!-- ==== ПОДКЛЮЧЕНИЕ FIREBASE ==== -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
   <script>
-    // Твой конфиг
+    // Конфиг Firebase (тот, что у тебя на проекте!)
     const firebaseConfig = {
       apiKey: "AIzaSyC1akzlj1iHHmGVv-NfyNYzOsXAKO543c9g",
       authDomain: "user-registration-da501.firebaseapp.com",
@@ -32,14 +33,15 @@
     };
     firebase.initializeApp(firebaseConfig);
 
-    document.getElementById('resetForm').addEventListener('submit', function(e) {
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const email = document.getElementById('reset-email').value;
-      const msg = document.getElementById('reset-message');
-      firebase.auth().sendPasswordResetEmail(email)
-        .then(() => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const msg = document.getElementById('reg-message');
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
           msg.style.color = "green";
-          msg.textContent = "Письмо для сброса пароля отправлено!";
+          msg.textContent = "Успешно зарегистрирован!";
         })
         .catch((error) => {
           msg.style.color = "red";
