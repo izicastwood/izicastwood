@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h2>Регистрация пользователя</h2>
+  <form id="registerForm" style="max-width:320px;margin:40px auto;">
+    <input type="email" id="email" placeholder="Email" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
+    <input type="password" id="password" placeholder="Пароль" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
+    <button type="submit" style="width:100%;padding:10px 0;">Зарегистрироваться</button>
+  </form>
+  <div id="reg-message" style="text-align:center;margin-top:20px;color:green;"></div>
+
+  <!-- ==== ПОДКЛЮЧЕНИЕ FIREBASE ==== -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script>
+    // твои реальные настройки (вставь их точно такие же, как на главной)
+    const firebaseConfig = {
+      apiKey: "AlzaSyC1akzlj1iHHmGVv-NfyNYzOsXAKO543c9g",
+      authDomain: "user-registration-da501.firebaseapp.com",
+      projectId: "user-registration-da501",
+      storageBucket: "user-registration-da501.appspot.com",
+      messagingSenderId: "676255544545",
+      appId: "1:676255544545:web:5f1becf75e7e0e4e3933a0",
+      measurementId: "G-9S9NX4D6B5"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <!-- ===== JS обработка формы ===== -->
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          document.getElementById('reg-message').textContent = 'Регистрация успешна!';
+        })
+        .catch((error) => {
+          document.getElementById('reg-message').style.color = 'red';
+          document.getElementById('reg-message').textContent = 'Ошибка: ' + error.message;
+        });
+    });
+  </script>
+</body>
+</html>
