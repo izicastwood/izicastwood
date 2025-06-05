@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Регистрация | Izicastwood</title>
 
-  <!-- ─── 1) Подключаем Firebase SDK (модульный v11.x) ─────────────────────────── -->
+  <!-- ─── 1) Подключаем Firebase SDK (модульный, версия 11.x) ─────────────────────────── -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
     import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
 
-    // Конфигурация вашего Firebase-проекта (копируйте из консоли Firebase)
+    // Конфигурация вашего Firebase-проекта (возьмите из консоли Firebase)
     const firebaseConfig = {
       apiKey: "AIzaSyBLAU6GOn7V8BxrxqNWk13Luj0Iu5GmhRw",
       authDomain: "izicast-c354f.firebaseapp.com",
@@ -27,21 +27,22 @@
     const auth = getAuth(app);
     const db   = getFirestore(app);
 
-    // Дождёмся полной загрузки DOM
+    // Дождёмся полной загрузки страницы, чтобы навесить обработчик
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("register-form");
       const messagesDiv = document.getElementById("messages");
 
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        messagesDiv.innerHTML = "";
+        messagesDiv.innerHTML = ""; // очистить предыдущие сообщения
 
+        // Читаем значения полей формы
         const email           = form.email.value.trim();
         const password        = form.password.value;
         const passwordConfirm = form.password_confirm.value;
         const consent         = form.consent.checked;
 
-        // Клиентская валидация
+        // Простая валидация на клиенте
         if (!consent) {
           showMessage("error", "Необходимо дать согласие на обработку данных.");
           return;
@@ -60,7 +61,7 @@
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           const user = userCredential.user;
 
-          // Сохраняем дополнительные данные в Firestore
+          // Сохраняем мета-данные в Firestore (коллекция "users")
           await setDoc(doc(db, "users", user.uid), {
             email: email,
             createdAt: serverTimestamp()
@@ -68,14 +69,14 @@
 
           showMessage("success", "Вы успешно зарегистрировались! Перенаправление на вход…");
           setTimeout(() => {
-            window.location.href = "Login-Template.html";
+            window.location.href = "Login-Template.html"; 
+            // <-- здесь вставьте фактический URL вашей страницы входа
           }, 1500);
         } catch (error) {
           showMessage("error", error.message);
         }
       });
 
-      // Функция для вывода flash-сообщений
       function showMessage(type, text) {
         const div = document.createElement("div");
         div.classList.add("flash");
@@ -87,7 +88,7 @@
   </script>
   <!-- ─────────────────────────────────────────────────────────────────────────── -->
 
-  <!-- ─── 2) Ваши стили для оформления формы ─────────────────────────── -->
+  <!-- ─── 2) Стили для оформления формы ─────────────────────────── -->
   <style>
     .u-section-1 {
       background-position: 50% 50%;
@@ -190,7 +191,7 @@
         padding: 15px;
       }
     }
-    /* Стили для flash-сообщений */
+    /* Стили для flash-сообщений (ошибка/успех) */
     .flash {
       padding: 10px;
       border-radius: 4px;
@@ -205,7 +206,7 @@
 <body>
   <section class="u-section-1">
     <div class="u-sheet-1">
-      <div id="messages"></div> <!-- Сообщения об ошибках/успехе -->
+      <div id="messages"></div> <!-- Здесь появятся сообщения “flash” -->
 
       <form id="register-form" class="u-form-1">
         <!-- 1) Эл. почта -->
