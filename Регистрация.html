@@ -4,31 +4,91 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Регистрация | Izicastwood</title>
+
+  <!-- ─── 1) Подключаем Firebase SDK (модульный v11.x) ─────────────────────────── -->
   <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBLAU6GOn7V8BxrxqNWk13Luj0Iu5GmhRw",
-    authDomain: "izicast-c354f.firebaseapp.com",
-    projectId: "izicast-c354f",
-    storageBucket: "izicast-c354f.firebasestorage.app",
-    messagingSenderId: "397085613201",
-    appId: "1:397085613201:web:e0922f718192d6f8d97330",
-    measurementId: "G-YES1THNM3G"
-  };
+    // Конфигурация вашего Firebase-проекта (скопирована из консоли Firebase)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBLAU6GOn7V8BxrxqNWk13Luj0Iu5GmhRw",
+      authDomain: "izicast-c354f.firebaseapp.com",
+      projectId: "izicast-c354f",
+      storageBucket: "izicast-c354f.appspot.com",
+      messagingSenderId: "397085613201",
+      appId: "1:397085613201:web:e0922f718192d6f8d97330",
+      measurementId: "G-YES1THNM3G"
+    };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+    // Инициализируем Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+
+    // После того как DOM загрузится, навешиваем обработчик на форму
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("register-form");
+      const messagesDiv = document.getElementById("messages");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        messagesDiv.innerHTML = "";
+
+        const email           = form.email.value.trim();
+        const password        = form.password.value;
+        const passwordConfirm = form.password_confirm.value;
+        const consent         = form.consent.checked;
+
+        // Клиентская валидация
+        if (!consent) {
+          showMessage("error", "Необходимо дать согласие на обработку данных.");
+          return;
+        }
+        if (password !== passwordConfirm) {
+          showMessage("error", "Пароли не совпадают.");
+          return;
+        }
+        if (password.length < 6) {
+          showMessage("error", "Пароль должен быть не менее 6 символов.");
+          return;
+        }
+
+        try {
+          // Регистрируем пользователя в Firebase Authentication
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          // Сохраняем дополнительные данные в Firestore
+          await setDoc(doc(db, "users", user.uid), {
+            email: email,
+            createdAt: serverTimestamp()
+          });
+
+          showMessage("success", "Вы успешно зарегистрировались! Перенаправление на вход…");
+          setTimeout(() => {
+            window.location.href = "Login-Template.html";
+          }, 1500);
+        } catch (error) {
+          showMessage("error", error.message);
+        }
+      });
+
+      // Вспомогательная функция для вывода flash-сообщений
+      function showMessage(type, text) {
+        const div = document.createElement("div");
+        div.classList.add("flash");
+        div.classList.add(type === "error" ? "error" : "success");
+        div.innerText = text;
+        messagesDiv.appendChild(div);
+      }
+    });
+  </script>
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+
+  <!-- ─── 2) Ваш CSS для оформления формы ─────────────────────────── -->
   <style>
-    /* Ваш существующий CSS, поправленный под новую разметку */
     .u-section-1 {
       background-position: 50% 50%;
       background-repeat: no-repeat;
@@ -41,9 +101,9 @@
     }
 
     .u-section-1 .u-form-1 {
-      height: auto;            /* Пусть сама высота подстраивается */
+      height: auto;
       width: 570px;
-      margin: 100px auto 60px; /* Сдвинули чуть вверх, чтобы форма была по центру */
+      margin: 100px auto 60px;
       background-color: rgba(255, 255, 255, 0.9);
       padding: 20px;
       border-radius: 8px;
@@ -53,14 +113,16 @@
 
     .u-section-1 .u-form-group-1,
     .u-section-1 .u-form-group-2,
-    .u-section-1 .u-form-group-3 {
+    .u-section-1 .u-form-group-3,
+    .u-section-1 .u-form-group-4 {
       margin-left: 0;
       margin-bottom: 15px;
     }
 
     .u-section-1 .u-form-group-1 label,
     .u-section-1 .u-form-group-2 label,
-    .u-section-1 .u-form-group-3 label {
+    .u-section-1 .u-form-group-3 label,
+    .u-section-1 .u-form-group-4 label {
       display: block;
       font-weight: bold;
       margin-bottom: 5px;
@@ -69,7 +131,8 @@
 
     .u-section-1 .u-form-group-1 input,
     .u-section-1 .u-form-group-2 input,
-    .u-section-1 .u-form-group-3 input {
+    .u-section-1 .u-form-group-3 input,
+    .u-section-1 .u-form-group-4 input {
       width: 100%;
       padding: 8px;
       font-size: 1rem;
@@ -82,7 +145,11 @@
       display: flex;
       align-items: center;
     }
-    .u-section-1 .u-form-group-3 input[type="checkbox"] {
+    .u-section-1 .u-form-group-4 {
+      display: flex;
+      align-items: center;
+    }
+    .u-section-1 .u-form-group-4 input[type="checkbox"] {
       margin-right: 8px;
     }
 
@@ -134,7 +201,7 @@
       }
     }
 
-    /* Flash-сообщения, если вы их используете */
+    /* Стили для flash-сообщений */
     .flash {
       padding: 10px;
       border-radius: 4px;
@@ -143,75 +210,75 @@
     .flash.success { background-color: #dff0d8; color: #3c763d; }
     .flash.error   { background-color: #f2dede; color: #a94442; }
   </style>
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
 </head>
+
 <body>
   <section class="u-section-1">
     <div class="u-sheet-1">
+      <div id="messages"></div> <!-- Здесь будут появляться сообщения об ошибке/успехе -->
 
-      <!-- Блок вывода flash-сообщений (если в register() вы используете flash) -->
-      {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          {% for category, msg in messages %}
-            <div class="flash {{ category }}">{{ msg }}</div>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
-
-      <form class="u-form-1" action="{{ url_for('register') }}" method="POST">
-        {{ form.hidden_tag() }}
-        <!-- CSRF-токен и скрытые поля WTForms -->
-
+      <form id="register-form" class="u-form-1">
         <!-- 1) Эл. почта -->
         <div class="u-form-group u-form-group-1">
-          {{ form.email.label }}
-          {{ form.email(class="u-input-styled", placeholder="Введите e-mail адрес") }}
-          {% for error in form.email.errors %}
-            <div style="color: #b00020; font-size: 0.9rem; margin-top: 5px;">
-              {{ error }}
-            </div>
-          {% endfor %}
+          <label for="email">Электронная почта</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Введите e-mail адрес"
+            required
+          />
         </div>
 
         <!-- 2) Пароль -->
         <div class="u-form-group u-form-group-2">
-          {{ form.password.label }}
-          {{ form.password(class="u-input-styled", placeholder="Придумайте пароль") }}
-          {% for error in form.password.errors %}
-            <div style="color: #b00020; font-size: 0.9rem; margin-top: 5px;">
-              {{ error }}
-            </div>
-          {% endfor %}
+          <label for="password">Пароль</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Придумайте пароль"
+            required
+          />
         </div>
 
         <!-- 3) Подтверждение пароля -->
         <div class="u-form-group u-form-group-3">
-          {{ form.password_confirm.label }}
-          {{ form.password_confirm(class="u-input-styled", placeholder="Повторите пароль") }}
-          {% for error in form.password_confirm.errors %}
-            <div style="color: #b00020; font-size: 0.9rem; margin-top: 5px;">
-              {{ error }}
-            </div>
-          {% endfor %}
+          <label for="password_confirm">Повторите пароль</label>
+          <input
+            type="password"
+            id="password_confirm"
+            name="password_confirm"
+            placeholder="Повторите пароль"
+            required
+          />
         </div>
 
         <!-- 4) Согласие на обработку персональных данных -->
         <div class="u-form-group u-form-group-4">
-          {{ form.consent }}
-          {{ form.consent.label(style="display:inline; margin-left:4px;") }}
-          {% for error in form.consent.errors %}
-            <div style="color: #b00020; font-size: 0.9rem; margin-top: 5px;">
-              {{ error }}
-            </div>
-          {% endfor %}
+          <input
+            type="checkbox"
+            id="consent"
+            name="consent"
+            required
+          />
+          <label for="consent" style="display:inline; margin-left:4px;">
+            Я даю согласие на обработку персональных данных
+          </label>
         </div>
 
-        <!-- Кнопки: Зарегистрироваться и Войти -->
-        <div class="u-form-group u-form-group-5" style="margin-top:20px; display:flex; justify-content: flex-start; align-items: center;">
-          <button type="submit" class="u-btn-1">{{ form.submit.label.text }}</button>
-          <a href="{{ url_for('login') }}" class="u-btn-2">Войти</a>
+        <!-- 5) Кнопки: Зарегистрироваться и Войти -->
+        <div class="u-form-group u-form-group-5" style="
+            margin-top:20px;
+            display:flex;
+            justify-content: flex-start;
+            align-items: center;
+          ">
+          <button type="submit" class="u-btn-1">Регистрация</button>
+          <a href="Login-Template.html" class="u-btn-2">Войти</a>
         </div>
       </form>
-
     </div>
   </section>
 </body>
