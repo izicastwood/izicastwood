@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Регистрация</title>
+  <title>Регистрация пользователя</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -13,12 +13,15 @@
     <button type="submit" style="width:100%;padding:10px 0;">Зарегистрироваться</button>
   </form>
   <div id="reg-message" style="text-align:center;margin-top:20px;color:green;"></div>
+  <div style="text-align:center;margin-top:15px;">
+    <a href="reset.html">Забыли пароль?</a>
+  </div>
 
   <!-- ==== ПОДКЛЮЧЕНИЕ FIREBASE ==== -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
   <script>
-    // Конфиг из консоли Firebase (ПРОВЕРЕННО ВЕРНЫЙ!)
+    // Конфиг Firebase (тот, что у тебя на проекте!)
     const firebaseConfig = {
       apiKey: "AIzaSyC1akzlj1iHHmGVv-NfyNYzOsXAKO543c9g",
       authDomain: "user-registration-da501.firebaseapp.com",
@@ -28,28 +31,21 @@
       appId: "1:676255544545:web:5f1becf75e7e0e4e3933a0",
       measurementId: "G-9S9NX4D6B5"
     };
-
-    // Инициализация Firebase
     firebase.initializeApp(firebaseConfig);
 
-    // Обработка формы регистрации
     document.getElementById('registerForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-      const messageDiv = document.getElementById('reg-message');
-      messageDiv.style.color = 'green';
-      messageDiv.textContent = "Пробуем зарегистрировать...";
-
+      const msg = document.getElementById('reg-message');
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          messageDiv.style.color = 'green';
-          messageDiv.textContent = "Успех! Пользователь зарегистрирован: " + userCredential.user.email;
-          document.getElementById('registerForm').reset();
+          msg.style.color = "green";
+          msg.textContent = "Успешно зарегистрирован!";
         })
         .catch((error) => {
-          messageDiv.style.color = 'red';
-          messageDiv.textContent = "Ошибка: " + error.message;
+          msg.style.color = "red";
+          msg.textContent = "Ошибка: " + error.message;
         });
     });
   </script>
