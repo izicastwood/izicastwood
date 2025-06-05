@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Регистрация | Izicastwood</title>
+
+  <!-- ─── 1) Подключаем Firebase SDK (модульный, версия 11.x) ─────────────────────────── -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
+
+    // Конфигурация вашего Firebase-проекта
+    const firebaseConfig = {
+      apiKey: "AIzaSyBLAU6GOn7V8BxrxqNWk13Luj0Iu5GmhRw",
+      authDomain: "izicast-c354f.firebaseapp.com",
+      projectId: "izicast-c354f",
+      storageBucket: "izicast-c354f.appspot.com",
+      messagingSenderId: "397085613201",
+      appId: "1:397085613201:web:e0922f718192d6f8d97330",
+      measurementId: "G-YES1THNM3G"
+    };
+
+    // Инициализируем Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+
+    // Ждём загрузки DOM, чтобы повесить обработчик на форму
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("register-form");
+      const messagesDiv = document.getElementById("messages");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        messagesDiv.innerHTML = "";
+
+        const email           = form.email.value.trim();
+        const password        = form.password.value;
+        const passwordConfirm = form.password_confirm.value;
+        const consent         = form.consent.checked;
+
+        // Простая клиентская валидация
+        if (!consent) {
+          showMessage("error", "Необходимо дать согласие на обработку данных.");
+          return;
+        }
+        if (password !== passwordConfirm) {
+          showMessage("error", "Пароли не совпадают.");
+          return;
+        }
+        if (password.length < 6) {
+          showMessage("error", "Пароль должен быть не менее 6 символов.");
+          return;
+        }
+
+        try {
+          // Регистрируем пользователя в Firebase Authentication
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          // Сохраняем данные в Firestore
+          await setDoc(doc(db, "users", user.uid), {
+            email: email,
+            createdAt: serverTimestamp()
+          });
+
+          showMessage("success", "Вы успешно зарегистрировались! Перенаправление на вход…");
+          setTimeout(() => {
+            window.location.href = "Login-Template.html"; 
+          }, 1500);
+        } catch (error) {
+          showMessage("error", error.message);
+        }
+      });
+
+      // Вспомогательная функция для flash-сообщений
+      function showMessage(type, text) {
+        const div = document.createElement("div");
+        div.classList.add("flash");
+        div.classList.add(type === "error" ? "error" : "success");
+        div.innerText = text;
+        messagesDiv.appendChild(div);
+      }
+    });
+  </script>
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+
+  <!-- ─── 2) Стили для оформления страницы ─────────────────────────── -->
+  <style>
+    .u-section-1 {
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-image: linear-gradient(to bottom, #3d2e29, #d9d9d9);
+      background-size: cover;
+    }
+    .u-section-1 .u-sheet-1 {
+      min-height: 629px;
+    }
+    .u-section-1 .u-form-1 {
+      height: auto;
+      width: 570px;
+      margin: 100px auto 60px;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      box-sizing: border-box;
+    }
+    .u-section-1 .u-form-group-1,
+    .u-section-1 .u-form-group-2,
+    .u-section-1 .u-form-group-3,
+    .u-section-1 .u-form-group-4 {
+      margin-left: 0;
+      margin-bottom: 15px;
+    }
+    .u-section-1 .u-form-group-1 label,
+    .u-section-1 .u-form-group-2 label,
+    .u-section-1 .u-form-group-3 label,
+    .u-section-1 .u-form-group-4 label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #3d2e29;
+    }
+    .u-section-1 .u-form-group-1 input,
+    .u-section-1 .u-form-group-2 input,
+    .u-section-1 .u-form-group-3 input,
+    .u-section-1 .u-form-group-4 input {
+      width: 100%;
+      padding: 8px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .u-section-1 .u-form-group-3 {
+      display: flex;
+      align-items: center;
+    }
+    .u-section-1 .u-form-group-4 {
+      display: flex;
+      align-items: center;
+    }
+    .u-section-1 .u-form-group-4 input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    .u-section-1 .u-btn-1 {
+      background-color: #3d2e29;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .u-section-1 .u-btn-1:hover {
+      background-color: #2c1f1a;
+    }
+    .u-section-1 .u-btn-2 {
+      background-color: transparent;
+      color: #3d2e29;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: 2px solid #3d2e29;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-left: 10px;
+    }
+    .u-section-1 .u-btn-2:hover {
+      background-color: #3d2e29;
+      color: #fff;
+    }
+    @media (max-width: 767px) {
+      .u-section-1 .u-form-1 {
+        width: 540px;
+      }
+    }
+    @media (max-width: 575px) {
+      .u-section-1 .u-sheet-1 {
+        min-height: 340px;
+      }
+      .u-section-1 .u-form-1 {
+        margin-top: 31px;
+        margin-bottom: 2px;
+        width: auto;
+        padding: 15px;
+      }
+    }
+    .flash {
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+    .flash.success { background-color: #dff0d8; color: #3c763d; }
+    .flash.error   { background-color: #f2dede; color: #a94442; }
+  </style>
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+</head>
+
+<body>
+  <section class="u-section-1">
+    <div class="u-sheet-1">
+      <div id="messages"></div> <!-- Здесь будут появляться ошибки/успех -->
+
+      <form id="register-form" class="u-form-1">
+        <!-- 1) Эл. почта -->
+        <div class="u-form-group u-form-group-1">
+          <label for="email">Электронная почта</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Введите e-mail адрес"
+            required
+          />
+        </div>
+
+        <!-- 2) Пароль -->
+        <div class="u-form-group u-form-group-2">
+          <label for="password">Пароль</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Придумайте пароль"
+            required
+          />
+        </div>
+
+        <!-- 3) Подтверждение пароля -->
+        <div class="u-form-group u-form-group-3">
+          <label for="password_confirm">Повторите пароль</label>
+          <input
+            type="password"
+            id="password_confirm"
+            name="password_confirm"
+            placeholder="Повторите пароль"
+            required
+          />
+        </div>
+
+        <!-- 4) Согласие на обработку персональных данных -->
+        <div class="u-form-group u-form-group-4">
+          <input
+            type="checkbox"
+            id="consent"
+            name="consent"
+            required
+          />
+          <label for="consent" style="display:inline; margin-left:4px;">
+            Я даю согласие на обработку персональных данных
+          </label>
+        </div>
+
+        <!-- 5) Кнопки: Зарегистрироваться и Войти -->
+        <div class="u-form-group u-form-group-5" style="
+            margin-top:20px;
+            display:flex;
+            justify-content: flex-start;
+            align-items: center;
+          ">
+          <button type="submit" class="u-btn-1">Регистрация</button>
+          <a href="Login-Template.html" class="u-btn-2">Войти</a>
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
+</html>
