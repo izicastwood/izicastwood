@@ -3,128 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <title>Личный кабинет</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="nicepage.css" media="screen">
-  <link rel="stylesheet" href="index.css" media="screen">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="nicepage.css">
+  <link rel="stylesheet" href="index.css">
+  <link rel="icon" href="images/favicon.ico">
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <meta name="theme-color" content="#478ac9">
-  <link rel="icon" href="images/favicon.ico">
-</head>
-<body class="u-body u-xl-mode" data-lang="ru">
-  <!-- ===== ШАПКА (скопирована с главной) ===== -->
-  <header class="u-align-center-xs u-block-fbf0-1 u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-clearfix u-header u-section-row-container u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs" id="header">
-    <div class="u-section-rows">
-      <div class="u-container-align-center u-image u-section-row u-image-1" data-image-width="1064" data-image-height="798">
-        <div class="u-clearfix u-sheet u-sheet-1"></div>
-      </div>
-      <div class="u-align-center-xs u-custom-color-2 u-section-row u-valign-middle-xs u-valign-top-lg u-valign-top-sm u-section-row-2">
-        <a href="index.html" class="u-image u-logo u-image-2" data-image-width="1024" data-image-height="1024">
-          <img src="images/ChatGPTImage2.2025.22_20_24.png" class="u-logo-image u-logo-image-1" data-image-width="80">
-        </a>
-        <h1 class="u-custom-font u-hidden-xs u-text u-text-1">IzicastWood</h1>
-        <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1" role="navigation">
-          <div class="menu-collapse u-custom-font u-font-merriweather">
-            <a class="u-button-style u-custom-color u-custom-text-color u-hamburger-link u-nav-link u-hamburger-link-1" aria-label="Открыть меню" aria-controls="d728" href="#">
-              <svg class="u-svg-link" viewBox="0 0 24 24"><use xlink:href="#svg-2821"></use></svg>
-              <svg class="u-svg-content" version="1.1" id="svg-2821" viewBox="0 0 16 16" x="0px" y="0px"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect></g></svg>
-            </a>
-          </div>
-          <div class="u-custom-menu u-nav-container">
-            <ul role="menubar" class="u-custom-font u-font-merriweather u-nav u-unstyled u-nav-1">
-              <li role="none" class="u-nav-item"><a role="menuitem" href="index.html" class="u-nav-link">Главная</a></li>
-              <li role="none" class="u-nav-item"><a role="menuitem" href="Контакты.html" class="u-nav-link">Контакты</a></li>
-              <li role="none" class="u-nav-item"><a role="menuitem" href="О-нас.html" class="u-nav-link">О нас</a></li>
-              <li role="none" class="u-nav-item"><a role="menuitem" href="registration.html" class="u-nav-link">Регистрация</a></li>
-              <li role="none" class="u-nav-item"><a role="menuitem" href="Каталог.html" class="u-nav-link" target="_blank">Каталог</a></li>
-              <li role="none" class="u-nav-item"><a role="menuitem" href="account.html" class="u-nav-link" style="font-weight:bold;">Личный кабинет</a></li>
-            </ul>
-          </div>
-          <div id="d728" role="region" aria-label="Панель меню" class="u-custom-menu u-nav-container-collapse">
-            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-              <div class="u-inner-container-layout u-sidenav-overflow">
-                <div class="u-menu-close" tabindex="-1" aria-controls="d728" aria-label="Закрыть меню"></div>
-                <ul role="menubar" class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                  <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="index.html">Главная</a></li>
-                  <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="Контакты.html">Контакты</a></li>
-                  <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="О-нас.html">О нас</a></li>
-                  <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="registration.html">Регистрация</a></li>
-                  <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="Каталог.html" target="_blank">Каталог</a></li>
-                  <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="account.html" style="font-weight:bold;">Личный кабинет</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-          </div>
-        </nav>
-        <a href="tel:+7 (918) 068 47 03" class="u-btn u-btn-rectangle u-button-style u-hidden-xs u-hover-none u-none u-btn-1">
-          <span class="u-icon"><svg class="u-svg-content" viewBox="0 0 405.333 405.333" style="width: 1em; height: 1em;"><path d="M373.333,266.88c-25.003,0-49.493-3.904-72.704-11.563c-11.328-3.904-24.192-0.896-31.637,6.699l-46.016,34.752c-52.8-28.181-86.592-61.952-114.389-114.368l33.813-44.928c8.512-8.512,11.563-20.971,7.915-32.64C142.592,81.472,138.667,56.96,138.667,32c0-17.643-14.357-32-32-32H32C14.357,0,0,14.357,0,32c0,205.845,167.488,373.333,373.333,373.333c17.643,0,32-14.357,32-32V298.88C405.333,281.237,390.976,266.88,373.333,266.88z"></path></svg></span>
-          +7 (918) 068 47 03
-        </a>
-      </div>
-    </div>
-  </header>
-  <!-- ===== /ШАПКА ===== -->
-
-  <main style="max-width:600px;margin:40px auto;background:#fff;padding:32px;border-radius:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);">
-    <h2 style="text-align:center;margin-bottom:32px;">Личный кабинет</h2>
-    <div id="user-info" style="font-size:18px;">
-      <p><strong>Email:</strong> <span id="user-email"></span></p>
-      <p><strong>Ваша персональная скидка:</strong> <span id="user-discount">5%</span></p>
-      <h3 style="margin-top:32px;">История заказов</h3>
-      <ul id="order-history" style="margin-bottom:16px;">
-        <li>Пока нет заказов.</li>
-      </ul>
-      <button id="logout-btn" style="margin-top:30px;width:100%;padding:12px;border-radius:8px;background:#478ac9;color:#fff;font-size:16px;border:none;">Выйти</button>
-    </div>
-  </main>
-
-  <!-- ===== ФУТЕР ===== -->
-  <footer class="u-align-center-sm u-align-center-xs u-clearfix u-footer u-gradient u-footer" id="footer">
-    <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
-      <h3 class="u-custom-font u-headline u-text u-text-default u-text-2">
-        <a href="/">Izicastwood — природа задаёт тон, ты задаёшь ритм.</a>
-      </h3>
-      <div class="u-social-icons u-social-icons-1">
-        <a class="u-social-url" title="facebook" target="_blank" href=""><span class="u-icon u-social-facebook u-social-icon u-icon-1"><svg class="u-svg-link" viewBox="0 0 112 112"><use xlink:href="#svg-d6cc"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-d6cc"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M73.5,31.6h-9.1c-1.4,0-3.6,0.8-3.6,3.9v8.5h12.6L72,58.3H60.8v40.8H43.9V58.3h-8V43.9h8v-9.2c0-6.7,3.1-17,17-17h12.5v13.9H73.5z"></path></svg></span></a>
-        <a class="u-social-url" title="twitter" target="_blank" href=""><span class="u-icon u-social-icon u-social-twitter u-icon-2"><svg class="u-svg-link" viewBox="0 0 112 112"><use xlink:href="#svg-5d7a"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-5d7a"><circle fill="currentColor" class="st0" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M83.8,47.3c0,0.6,0,1.2,0,1.7c0,17.7-13.5,38.2-38.2,38.2C38,87.2,31,85,25,81.2c1,0.1,2.1,0.2,3.2,0.2c6.3,0,12.1-2.1,16.7-5.7c-5.9-0.1-10.8-4-12.5-9.3c0.8,0.2,1.7,0.2,2.5,0.2c1.2,0,2.4-0.2,3.5-0.5c-6.1-1.2-10.8-6.7-10.8-13.1c0-0.1,0-0.1,0-0.2c1.8,1,3.9,1.6,6.1,1.7c-3.6-2.4-6-6.5-6-11.2c0-2.5,0.7-4.8,1.8-6.7c6.6,8.1,16.5,13.5,27.6,14c-0.2-1-0.3-2-0.3-3.1c0-7.4,6-13.4,13.4-13.4c3.9,0,7.3,1.6,9.8,4.2c3.1-0.6,5.9-1.7,8.5-3.3c-1,3.1-3.1,5.8-5.9,7.4c2.7-0.3,5.3-1,7.7-2.1C88.7,43,86.4,45.4,83.8,47.3z"></path></svg></span></a>
-        <a class="u-social-url" title="instagram" target="_blank" href=""><span class="u-icon u-social-icon u-social-instagram u-icon-3"><svg class="u-svg-link" viewBox="0 0 112 112"><use xlink:href="#svg-a8be"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-a8be"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M55.9,38.2c-9.9,0-17.9,8-17.9,17.9C38,66,46,74,55.9,74c9.9,0,17.9-8,17.9-17.9C73.8,46.2,65.8,38.2,55.9,38.2z M55.9,66.4c-5.7,0-10.3-4.6-10.3-10.3c-0.1-5.7,4.6-10.3,10.3-10.3c5.7,0,10.3,4.6,10.3,10.3C66.2,61.8,61.6,66.4,55.9,66.4z"></path><path fill="#FFFFFF" d="M74.3,33.5c-2.3,0-4.2,1.9-4.2,4.2s1.9,4.2,4.2,4.2s4.2-1.9,4.2-4.2S76.6,33.5,74.3,33.5z"></path><path fill="#FFFFFF" d="M73.1,21.3H38.6c-9.7,0-17.5,7.9-17.5,17.5v34.5c0,9.7,7.9,17.6,17.5,17.6h34.5c9.7,0,17.5-7.9,17.5-17.5V38.8C90.6,29.1,82.7,21.3,73.1,21.3z M83,73.3c0,5.5-4.5,9.9-9.9,9.9H38.6c-5.5,0-9.9-4.5-9.9-9.9V38.8c0-5.5,4.5-9.9,9.9-9.9h34.5c5.5,0,9.9,4.5,9.9,9.9V73.3z"></path></svg></span></a>
-        <a class="u-social-url" title="linkedin" target="_blank" href=""><span class="u-icon u-social-icon u-social-linkedin u-icon-4"><svg class="u-svg-link" viewBox="0 0 112 112"><use xlink:href="#svg-abc0"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-abc0"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M41.3,83.7H27.9V43.4h13.4V83.7z M34.6,37.9L34.6,37.9c-4.6,0-7.5-3.1-7.5-7c0-4,3-7,7.6-7s7.4,3,7.5,7C42.2,34.8,39.2,37.9,34.6,37.9z M89.6,83.7H76.2V62.2c0-5.4-1.9-9.1-6.8-9.1c-3.7,0-5.9,2.5-6.9,4.9c-0.4,0.9-0.4,2.1-0.4,3.3v22.5H48.7c0,0,0.2-36.5,0-40.3h13.4v5.7c1.8-2.7,5-6.7,12.1-6.7c8.8,0,15.4,5.8,15.4,18.1V83.7z"></path></svg></span></a>
-      </div>
-      <p class="u-text u-text-3">ИП Плужник Даниил Павлович<br>ИНН: 234107243336<br>ОГРНИП: 324237500384678<br>Юридический адрес: 353740, Краснодарский край, станица Ленинградская, ул. Мира, д. 110<br>Телефон: +7 (918) 068-47-03<br>Email: izicast@yandex.com
-      </p>
-    </div>
-  </footer>
-  <!-- ===== /ФУТЕР ===== -->
-
-  <script>
-    // Инициализация Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyClakzljiHHmvGv-vNfyNZ0sXAKO543c9g",
-      authDomain: "user-registration-da501.firebaseapp.com",
-      projectId: "user-registration-da501",
-      storageBucket: "user-registration-da501.firebasestorage.app",
-      messagingSenderId: "676255544545",
-      appId: "1:676255544545:web:5f1becf75e7e0e4e3933a0",
-      measurementId: "G-9S9NX4D60S"
-    };
-    firebase.initializeApp(firebaseConfig);
-
-    // Проверка входа пользователя
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        document.getElementById('user-email').textContent = user.email;
-        // Тут можно добавить загрузку истории заказов и скидки из базы
-      } else {
-        window.location.href = 'registration.html';
-      }
-    });
-
-    document.getElementById('logout-btn').onclick = function() {
-      firebase.auth().signOut().then(function() {
-        window.location.href = 'registration.html';
-      });
+  <style>
+    nav ul { display: flex; flex-wrap: wrap; gap: 15px; list-style: none; padding: 0;}
+    nav { margin-top: 15px; }
+    .logo { display: flex; align-items: center; gap:10px; }
+    @media (max-width:600px){
+      nav ul { flex-direction: column; gap: 10px;}
+      nav { text-align: center;}
     }
-  </script>
+    .account-block {max-width: 500px; margin: 40px auto; border: 1px solid #eee; border-radius:10px; padding: 30px; background: #fafafa;}
+    .history-table {width: 100%; border-collapse: collapse;}
+    .history-table th, .history-table td {border: 1px solid #ccc; padding: 6px;}
+    .logout-btn {margin-top: 20px;}
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <a href="index.html"><img src="images/ChatGPTImage2.2025.22_20_24.png" alt="logo" style="height:50px"></a>
+    <span>IzicastWood</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="Контакты.html">Контакты</a></li>
+      <li><a href="О-нас.html">О нас</a></li>
+      <li><a href="registration.html">Регистрация</a></li>
+      <li><a href="login.html">Войти</a></li>
+      <li><a href="Каталог.html" target="_blank">Каталог</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <div class="account-block">
+    <h2>Личный кабинет</h2>
+    <div id="user-info"></div>
+    <h3>История заказов</h3>
+    <table class="history-table">
+      <thead>
+        <tr><th>№</th><th>Товар</th><th>Дата</th><th>Сумма</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Доска "Премиум"</td><td>2024-05-21</td><td>3200 ₽</td></tr>
+        <tr><td>2</td><td>Доска "Classic"</td><td>2024-03-04</td><td>1800 ₽</td></tr>
+      </tbody>
+    </table>
+    <h3>Ваша персональная скидка: <span style="color:green;">5%</span></h3>
+    <button class="logout-btn" onclick="logout()">Выйти</button>
+  </div>
+</main>
+<footer>
+  <p>ИП Плужник Даниил Павлович<br>
+    ИНН: 234107243336<br>
+    ОГРНИП: 324237500384678<br>
+    Краснодарский край, ст. Ленинградская, ул. Мира, д. 110<br>
+    Тел.: +7 (918) 068-47-03, email: izicast@yandex.com
+  </p>
+</footer>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyClakzljiHHmvGv-vNfyNZ0sXAKO543c9g",
+    authDomain: "user-registration-da501.firebaseapp.com",
+    projectId: "user-registration-da501",
+    storageBucket: "user-registration-da501.firebasestorage.app",
+    messagingSenderId: "676255544545",
+    appId: "1:676255544545:web:5f1becf75e7e0e4e3933a0",
+    measurementId: "G-9S9NX4D60S"
+  };
+  firebase.initializeApp(firebaseConfig);
+
+  function logout() {
+    firebase.auth().signOut().then(() => {
+      window.location.href = 'login.html';
+    });
+  }
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    const info = document.getElementById('user-info');
+    if (user) {
+      info.innerHTML = `
+        <b>Email:</b> ${user.email}<br>
+        <b>UID:</b> ${user.uid}<br>
+      `;
+    } else {
+      window.location.href = 'login.html';
+    }
+  });
+</script>
 </body>
 </html>
