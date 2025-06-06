@@ -1,155 +1,88 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="ru">
+<html lang="ru">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="IzicastWood, IzicastWood">
-    <meta name="description" content="">
-    <title>Регистрация</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-    <link rel="stylesheet" href="index.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-    <meta name="generator" content="Nicepage 7.9.4, nicepage.com">
-    <link rel="icon" href="images/favicon.ico">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    <link id="u-header-footer-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i|Allura:400|Audiowide:400">
-    <meta name="theme-color" content="#478ac9">
+  <meta charset="UTF-8">
+  <title>Регистрация</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="nicepage.css">
+  <link rel="stylesheet" href="index.css">
+  <link rel="icon" href="images/favicon.ico">
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <style>
+    nav ul { display: flex; flex-wrap: wrap; gap: 15px; list-style: none; padding: 0;}
+    nav { margin-top: 15px; }
+    .logo { display: flex; align-items: center; gap:10px; }
+    @media (max-width:600px){
+      nav ul { flex-direction: column; gap: 10px;}
+      nav { text-align: center;}
+    }
+  </style>
 </head>
-<body class="u-body u-xl-mode" data-lang="ru">
-
-<header class="u-align-center-xs u-block-fbf0-1 u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-clearfix u-header u-section-row-container u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs" id="header">
-    <div class="u-section-rows">
-        <div class="u-container-align-center u-image u-section-row u-image-1" data-image-width="1064" data-image-height="798">
-            <div class="u-clearfix u-sheet u-sheet-1"></div>
-        </div>
-        <div class="u-align-center-xs u-custom-color-2 u-section-row u-valign-middle-xs u-valign-top-lg u-valign-top-sm u-section-row-2">
-            <a href="" class="u-image u-logo u-image-2" data-image-width="1024" data-image-height="1024">
-                <img src="images/ChatGPTImage2.2025.22_20_24.png" class="u-logo-image u-logo-image-1" data-image-width="80">
-            </a>
-            <h1 class="u-custom-font u-hidden-xs u-text u-text-1">IzicastWood</h1>
-            <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1" role="navigation">
-                <div class="menu-collapse u-custom-font u-font-merriweather">
-                    <a class="u-button-style u-custom-color u-custom-text-color u-hamburger-link u-nav-link u-hamburger-link-1" aria-label="Открыть меню" aria-controls="d728" href="#">
-                        <svg class="u-svg-link" viewBox="0 0 24 24"><use xlink:href="#svg-2821"></use></svg>
-                        <svg class="u-svg-content" version="1.1" id="svg-2821" viewBox="0 0 16 16" x="0px" y="0px"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect></g></svg>
-                    </a>
-                </div>
-                <div class="u-custom-menu u-nav-container">
-                    <ul role="menubar" class="u-custom-font u-font-merriweather u-nav u-unstyled u-nav-1">
-                        <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="./">Главная</a></li>
-                        <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="Контакты.html">Контакты</a></li>
-                        <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="О-нас.html">О нас</a></li>
-                        <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="registration.html">Регистрация</a></li>
-                        <li role="none" class="u-nav-item"><a role="menuitem" class="u-nav-link" href="Каталог.html" target="_blank">Каталог</a></li>
-                    </ul>
-                </div>
-                <div id="d728" role="region" aria-label="Панель меню" class="u-custom-menu u-nav-container-collapse">
-                    <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-                        <div class="u-inner-container-layout u-sidenav-overflow">
-                            <div class="u-menu-close" tabindex="-1" aria-controls="d728" aria-label="Закрыть меню"></div>
-                            <ul role="menubar" class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                                <li role="none" class="u-nav-item"><a role="menuitem" class="u-button-style u-nav-link" href="./">Главная</a></li>
-                                <li role="none" class="u-nav-item"><a role="menuitem" class="u-button-style u-nav-link" href="Контакты.html">Контакты</a></li>
-                                <li role="none" class="u-nav-item"><a role="menuitem" class="u-button-style u-nav-link" href="О-нас.html">О нас</a></li>
-                                <li role="none" class="u-nav-item"><a role="menuitem" class="u-button-style u-nav-link" href="registration.html">Регистрация</a></li>
-                                <li role="none" class="u-nav-item"><a role="menuitem" class="u-button-style u-nav-link" href="Каталог.html" target="_blank">Каталог</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-                </div>
-            </nav>
-            <a class="u-shopping-cart u-shopping-cart-1" href="#popup-8223"><span class="u-icon u-shopping-cart-icon u-icon-1"></span></a>
-            <a href="tel:+7 (918) 068 47 03" class="u-active-none u-btn u-btn-rectangle u-button-style u-hidden-xs u-hover-none u-none u-btn-1">
-                <span class="u-icon"></span>+7 (918) 068 47 03
-            </a>
-        </div>
-    </div>
+<body>
+<header>
+  <div class="logo">
+    <a href="index.html"><img src="images/ChatGPTImage2.2025.22_20_24.png" alt="logo" style="height:50px"></a>
+    <span>IzicastWood</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="Контакты.html">Контакты</a></li>
+      <li><a href="О-нас.html">О нас</a></li>
+      <li><a href="registration.html">Регистрация</a></li>
+      <li><a href="login.html">Войти</a></li>
+      <li><a href="Каталог.html" target="_blank">Каталог</a></li>
+    </ul>
+  </nav>
 </header>
-
-<!-- Форма регистрации -->
-<section class="u-section" style="padding: 40px 0;">
-    <div style="max-width: 380px; margin: 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 32px;">
-        <h2 style="text-align:center;margin-bottom:24px;">Регистрация пользователя</h2>
-        <form id="registerForm">
-            <input type="email" id="email" placeholder="Email" required style="display:block;width:100%;margin-bottom:12px;padding:10px;border-radius:8px;">
-            <input type="password" id="password" placeholder="Пароль" required style="display:block;width:100%;margin-bottom:12px;padding:10px;border-radius:8px;">
-            <button type="submit" style="width:100%;padding:12px 0; border-radius:8px;">Зарегистрироваться</button>
-        </form>
-        <button id="forgotPasswordBtn" style="width:100%;margin-top:10px;padding:10px;border:none;background:transparent;text-decoration:underline;color:#478ac9;cursor:pointer;">Забыли пароль?</button>
-        <div id="reg-message" style="text-align:center;margin-top:20px;color:green;"></div>
-    </div>
-</section>
-
-<footer class="u-align-center-sm u-align-center-xs u-clearfix u-footer u-gradient u-footer" id="footer">
-    <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
-        <h3 class="u-custom-font u-headline u-text u-text-default u-text-2">
-            <a href="/">Izicastwood — природа задаёт тон, ты задаёшь ритм. </a>
-        </h3>
-        <div class="u-social-icons u-social-icons-1">
-            <!-- соцсети -->
-        </div>
-        <p class="u-text u-text-3">Индивидуальный предприниматель: Плужник Даниил Павлович<br>ИНН: 234107243336<br>ОГРНИП: 324237500384678<br>Юридический адрес: 353740, Краснодарский край, станица Ленинградская, ул. Мира, д. 110<br>Телефон: +7 (918) 068-47-03<br>Email: izicast@yandex.com
-        </p>
-    </div>
+<main>
+  <h2>Регистрация пользователя</h2>
+  <form id="registerForm" style="max-width:320px;margin:40px auto;">
+    <input type="email" id="email" placeholder="Email" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
+    <input type="password" id="password" placeholder="Пароль" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
+    <button type="submit" style="width:100%;padding:10px 0;">Зарегистрироваться</button>
+  </form>
+  <div id="reg-message" style="text-align:center;margin-top:20px;color:green;"></div>
+</main>
+<footer>
+  <p>ИП Плужник Даниил Павлович<br>
+    ИНН: 234107243336<br>
+    ОГРНИП: 324237500384678<br>
+    Краснодарский край, ст. Ленинградская, ул. Мира, д. 110<br>
+    Тел.: +7 (918) 068-47-03, email: izicast@yandex.com
+  </p>
 </footer>
-
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
-    // Новый firebase config, как ты прислал выше
-    const firebaseConfig = {
-      apiKey: "AIzaSyClakzljiHHmvGv-vNfyNZ0sXAKO543c9g",
-      authDomain: "user-registration-da501.firebaseapp.com",
-      projectId: "user-registration-da501",
-      storageBucket: "user-registration-da501.firebasestorage.app",
-      messagingSenderId: "676255544545",
-      appId: "1:676255544545:web:5f1becf75e7e0e4e3933a0",
-      measurementId: "G-9S9NX4D60S"
-    };
-    firebase.initializeApp(firebaseConfig);
+  const firebaseConfig = {
+    apiKey: "AIzaSyClakzljiHHmvGv-vNfyNZ0sXAKO543c9g",
+    authDomain: "user-registration-da501.firebaseapp.com",
+    projectId: "user-registration-da501",
+    storageBucket: "user-registration-da501.firebasestorage.app",
+    messagingSenderId: "676255544545",
+    appId: "1:676255544545:web:5f1becf75e7e0e4e3933a0",
+    measurementId: "G-9S9NX4D60S"
+  };
+  firebase.initializeApp(firebaseConfig);
 
-    // Регистрация пользователя
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value;
-        const messageDiv = document.getElementById('reg-message');
-        messageDiv.style.color = "green";
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                messageDiv.textContent = "Успешная регистрация!";
-                setTimeout(() => {
-                    window.location.href = "./"; // после регистрации на главную
-                }, 1500);
-            })
-            .catch((error) => {
-                messageDiv.style.color = "red";
-                messageDiv.textContent = error.message;
-            });
-    });
+  const form = document.getElementById('registerForm');
+  const messageDiv = document.getElementById('reg-message');
 
-    // Восстановление пароля
-    document.getElementById('forgotPasswordBtn').addEventListener('click', function() {
-        const email = document.getElementById('email').value.trim();
-        const messageDiv = document.getElementById('reg-message');
-        if (!email) {
-            messageDiv.style.color = "red";
-            messageDiv.textContent = "Введите email для восстановления пароля!";
-            return;
-        }
-        firebase.auth().sendPasswordResetEmail(email)
-            .then(() => {
-                messageDiv.style.color = "green";
-                messageDiv.textContent = "Ссылка для восстановления пароля отправлена на email.";
-            })
-            .catch((error) => {
-                messageDiv.style.color = "red";
-                messageDiv.textContent = error.message;
-            });
-    });
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = form.email.value;
+    const password = form.password.value;
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        messageDiv.style.color = 'green';
+        messageDiv.textContent = 'Регистрация успешна! Перенаправление...';
+        setTimeout(() => { window.location.href = "index.html"; }, 2000);
+      })
+      .catch(error => {
+        messageDiv.style.color = 'red';
+        messageDiv.textContent = error.message;
+      });
+  });
 </script>
 </body>
 </html>
