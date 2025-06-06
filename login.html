@@ -2,50 +2,108 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Вход</title>
+  <title>Вход — IzicastWood</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="nicepage.css" media="screen">
+  <link rel="stylesheet" href="index.css" media="screen">
+  <link rel="icon" href="images/favicon.ico">
+  <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-header-footer-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i|Allura:400|Audiowide:400">
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 </head>
-<body>
-  <h2 style="text-align:center;">Вход в аккаунт</h2>
-  <form id="loginForm" style="max-width:320px;margin:40px auto;">
-    <input type="email" id="email" placeholder="Email" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
-    <input type="password" id="password" placeholder="Пароль" required style="display:block;width:100%;margin-bottom:10px;padding:8px;">
-    <button type="submit" style="width:100%;padding:10px 0;">Войти</button>
-  </form>
-  <div id="login-message" style="text-align:center;margin-top:20px;color:green;"></div>
-  <div style="text-align:center;"><a href="reset.html">Забыли пароль?</a></div>
+<body class="u-body u-xl-mode" data-lang="ru" style="background:#f7f7f9;">
 
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <!-- ====== Шапка сайта ====== -->
+  <header class="u-header u-section-row-container" style="background: #fff; border-bottom: 1px solid #eee;">
+    <div class="u-section-rows">
+      <div class="u-container-align-center u-image u-section-row u-image-1" data-image-width="1064" data-image-height="798">
+        <div class="u-clearfix u-sheet u-sheet-1"></div>
+      </div>
+      <div class="u-align-center-xs u-custom-color-2 u-section-row u-valign-middle-xs u-section-row-2">
+        <a href="index.html" class="u-image u-logo u-image-2" data-image-width="1024" data-image-height="1024" style="display:inline-block;vertical-align:middle;">
+          <img src="images/ChatGPTImage2.2025.22_20_24.png" class="u-logo-image u-logo-image-1" data-image-width="80" style="height:64px;">
+        </a>
+        <h1 class="u-custom-font u-hidden-xs u-text u-text-1" style="display:inline-block;vertical-align:middle;margin-left:12px;font-size:2rem;">IzicastWood</h1>
+        <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1" role="navigation" style="display:inline-block;float:right;margin-left:auto;">
+          <div class="menu-collapse u-custom-font u-font-merriweather">
+            <a class="u-button-style u-custom-color u-custom-text-color u-hamburger-link u-nav-link u-hamburger-link-1" aria-label="Открыть меню" aria-controls="d728" href="#">
+              <svg class="u-svg-link" viewBox="0 0 24 24"><use xlink:href="#svg-2821"></use></svg>
+              <svg class="u-svg-content" version="1.1" id="svg-2821" viewBox="0 0 16 16"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect></g></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container">
+            <ul role="menubar" class="u-custom-font u-font-merriweather u-nav u-unstyled u-nav-1">
+              <li class="u-nav-item"><a class="u-nav-link" href="index.html">Главная</a></li>
+              <li class="u-nav-item"><a class="u-nav-link" href="Контакты.html">Контакты</a></li>
+              <li class="u-nav-item"><a class="u-nav-link" href="О-нас.html">О нас</a></li>
+              <li class="u-nav-item"><a class="u-nav-link" href="registration.html">Регистрация</a></li>
+              <li class="u-nav-item"><a class="u-nav-link" href="login.html" style="font-weight:bold;color:#478ac9;">Войти</a></li>
+              <li class="u-nav-item"><a class="u-nav-link" href="Каталог.html" target="_blank">Каталог</a></li>
+            </ul>
+          </div>
+          <div id="d728" class="u-custom-menu u-nav-container-collapse" role="region" aria-label="Панель меню">
+            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-inner-container-layout u-sidenav-overflow">
+                <div class="u-menu-close" tabindex="-1" aria-controls="d728" aria-label="Закрыть меню"></div>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                  <li class="u-nav-item"><a class="u-nav-link" href="index.html">Главная</a></li>
+                  <li class="u-nav-item"><a class="u-nav-link" href="Контакты.html">Контакты</a></li>
+                  <li class="u-nav-item"><a class="u-nav-link" href="О-нас.html">О нас</a></li>
+                  <li class="u-nav-item"><a class="u-nav-link" href="registration.html">Регистрация</a></li>
+                  <li class="u-nav-item"><a class="u-nav-link" href="login.html" style="font-weight:bold;color:#478ac9;">Войти</a></li>
+                  <li class="u-nav-item"><a class="u-nav-link" href="Каталог.html" target="_blank">Каталог</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- ====== /Шапка сайта ====== -->
+
+  <!-- ====== Блок формы входа ====== -->
+  <main style="max-width:360px;margin:40px auto 60px auto;background:#fff;padding:32px;border-radius:22px;box-shadow:0 4px 24px rgba(80,90,120,.10);">
+    <h2 style="text-align:center;margin-bottom:32px;">Вход</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required style="display:block;width:100%;margin-bottom:12px;padding:10px;border-radius:8px;">
+      <input type="password" id="password" placeholder="Пароль" required style="display:block;width:100%;margin-bottom:12px;padding:10px;border-radius:8px;">
+      <button type="submit" style="width:100%;padding:11px 0;border-radius:8px;background:#478ac9;color:#fff;font-size:1rem;font-weight:600;border:none;">Войти</button>
+      <div style="text-align:right;margin-top:10px;">
+        <a href="registration.html" style="color:#478ac9;">Нет аккаунта? Регистрация</a>
+      </div>
+      <div id="login-message" style="text-align:center;margin-top:16px;color:#b60a00;"></div>
+    </form>
+  </main>
+  <!-- ====== /Блок формы входа ====== -->
+
+  <!-- ====== Футер сайта (скопируй из index.html, если нужен единый стиль) ====== -->
+
   <script>
+    // Firebase init
     const firebaseConfig = {
-      apiKey: "AIzaSyC1akzlj1iHHmGVv-NfyNYzOsXAKO543c9g",
+      apiKey: "AIzaSyClakzljiHHmvGv-vNfyNZ0sXAKO543c9g",
       authDomain: "user-registration-da501.firebaseapp.com",
       projectId: "user-registration-da501",
-      storageBucket: "user-registration-da501.appspot.com",
+      storageBucket: "user-registration-da501.firebasestorage.app",
       messagingSenderId: "676255544545",
       appId: "1:676255544545:web:5f1becf75e7e0e4e3933a0",
-      measurementId: "G-9S9NX4D6B5"
+      measurementId: "G-9S9NX4D60S"
     };
     firebase.initializeApp(firebaseConfig);
 
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    document.getElementById('loginForm').addEventListener('submit', function(e){
       e.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const msg = document.getElementById('login-message');
-      msg.style.color = 'green';
-      msg.textContent = "Пробуем войти...";
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
       firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          msg.textContent = "Успех! Сейчас вы будете перенаправлены в личный кабинет.";
-          setTimeout(() => {
-            window.location.href = "profile.html";
-          }, 1000);
+        .then(() => {
+          window.location.href = "account.html";
         })
         .catch((error) => {
-          msg.style.color = 'red';
-          msg.textContent = "Ошибка: " + error.message;
+          document.getElementById('login-message').textContent = error.message;
         });
     });
   </script>
